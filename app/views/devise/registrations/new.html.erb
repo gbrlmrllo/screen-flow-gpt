@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <h1 class="title">Registrarse</h1>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render 'devise/shared/error_messages', resource: resource %>
+
+        <div class="field">
+          <%= f.label :email %>
+          <div class="control has-icons-left">
+            <%= f.email_field :email, class: 'input', autocomplete: 'email' %>
+            <span class="icon is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <div class="control has-icons-left">
+            <%= f.password_field :password, class: 'input', autocomplete: 'new-password' %>
+            <span class="icon is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <div class="control has-icons-left">
+            <%= f.password_field :password_confirmation, class: 'input', autocomplete: 'new-password' %>
+            <span class="icon is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%= f.submit 'Registrarse', class: 'button is-primary' %>
+          </div>
+
+          <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+            <div class="control">
+              <%= link_to 'No recibí el correo de confirmación', new_confirmation_path(resource_name), class: 'button is-text' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= render 'devise/shared/links' %>
+    </div>
+  </div>
+</div>
