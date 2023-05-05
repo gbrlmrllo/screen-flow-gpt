@@ -13,6 +13,7 @@
 .idea/*
 
 .env
+.envrc
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
