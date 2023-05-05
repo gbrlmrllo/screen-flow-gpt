@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    message = @page.messages.create(content: set_message, role: :user)
+    @page.messages.create(content: set_message, role: :user)
     open_client = OpenAiService.new
     @response = open_client.call_openai(@page.messages).remove("```")
     @page.messages.create(content: @response, role: :assistant)

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :pages
+  before_action :pages, if: :current_user
 
   private
 
