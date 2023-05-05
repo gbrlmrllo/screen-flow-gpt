@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    message = @page.messages.create(content: params[:message], role: :user)
+    message = @page.messages.create(content: set_message, role: :user)
     open_client = OpenAiService.new
     @response = open_client.call_openai(@page.messages).remove("```")
     @page.messages.create(content: @response, role: :assistant)
@@ -38,6 +38,10 @@ class PagesController < ApplicationController
 
   def set_page
     @page = current_user.project.pages.find(params[:id])
+  end
+
+  def set_message
+    "You will provide only HTML for the requirement  delimited by <#{params[:message]}>"
   end
 
   def page_params
