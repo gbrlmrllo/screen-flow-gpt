@@ -1,8 +1,26 @@
-<p> <%= @page.content&.html_safe %> </p>
+<div>
+    <div><%= @page.content&.html_safe %></div>
+    <%= form_with(url: page_path(@page.id), method: :put, html: { class: 'columns is-vcentered' }) do |form| %>
+      <div class="column is-10">
+        <%= form.label :message, class: 'label is-medium' %>
+        <%= form.text_area :message, class: 'textarea is-medium', placeholder: 'Write your prompt here' %>
+      </div>
+      <div class="column is-2">
+        <%= form.submit 'Guardar cambios', class: 'button is-primary is-medium is-fullwidth' %>
+      </div>
+    <% end %>
 
-<%= form_with(url: page_path(@page.id),  method: :put) do |form| %>
-  <%= form.label :message %>
-  <%= form.text_area :message %>
 
-  <%= form.submit 'Guardar cambios' %>
-<% end %>
+  <div>
+    <h2 class="title is-4">Prompt History</h2>
+      <div class="content" style="word-break: break-word;">
+        <pre>
+          <% @page.messages.user.each do |message| %>
+            <p>
+              <strong>prompt:</strong> <%= message.content.match(/<([^>]*)>/).captures.first %>
+            </p>
+          <% end %>
+        </pre>
+      </div>
+  </div>
+</div>
